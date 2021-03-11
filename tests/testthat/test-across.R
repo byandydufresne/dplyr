@@ -391,6 +391,18 @@ test_that("if_any() and if_all() respect filter()-like NA handling", {
   )
 })
 
+test_that("top_across() evaluates ... lazily (#5813)", {
+  df <- tibble(x = tibble(foo = 1), y = tibble(foo = 2))
+
+  res <- mutate(df, across(
+      everything(),
+      mutate,
+      foo = foo + 1
+    ))
+  expect_equal(res$x$foo, 2)
+  expect_equal(res$y$foo, 3)
+})
+
 # c_across ----------------------------------------------------------------
 
 test_that("selects and combines columns", {
