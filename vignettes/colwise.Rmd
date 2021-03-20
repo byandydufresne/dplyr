@@ -346,8 +346,10 @@ There are a few exceptions to this rule:
     surprising:
 
     ```{r}
-    df <- tibble(x = 2, y = 4, z = 8)
-    df %>% mutate_all(~ .x / y)
+    df <- tibble(x = 2, y = 4, z = 8, m = 16, n = 32)
+    df %>% mutate_all(~ .x / z)
+    df %>% mutate_all(~ .x / 8)
     
-    df %>% mutate(across(everything(), ~ .x / y))
+    df %>% mutate(across(everything(), ~ .x / z))
+    df %>% mutate(across(everything(), ~ .x / 8))
     ```
